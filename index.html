@@ -51,7 +51,12 @@
 <li>Life cycle interceptors</li>
 <li>Bean Validation (JSR-303)</li>
 <li>Distributed CAS operation support</li>
-</ul><h2>
+<li>Multi-keyspace</li>
+<li>Naming Strategy</li>
+<li>Type Transformer</li>
+</ul>
+
+<h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>To use <strong>Achilles</strong>, just add the following dependency in your <strong>pom.xml</strong>:</p>
@@ -59,7 +64,7 @@
 <div class="highlight highlight-xml"><pre>    <span class="nt">&lt;dependency&gt;</span>    
         <span class="nt">&lt;groupId&gt;</span>info.archinnov<span class="nt">&lt;/groupId&gt;</span>
         <span class="nt">&lt;artifactId&gt;</span>achilles-core<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>3.0.6<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;version&gt;</span>3.0.7<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
 
@@ -68,7 +73,7 @@
 <div class="highlight highlight-xml"><pre>    <span class="nt">&lt;dependency&gt;</span>    
         <span class="nt">&lt;groupId&gt;</span>info.archinnov<span class="nt">&lt;/groupId&gt;</span>
         <span class="nt">&lt;artifactId&gt;</span>achilles-junit<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>3.0.6<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;version&gt;</span>3.0.7<span class="nt">&lt;/version&gt;</span>
         <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
     <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
@@ -76,13 +81,20 @@
 <p>For now, <strong>Achilles</strong> depends on the following libraries:</p>
 
 <ol>
-<li>cassandra 2.0.9</li>
-<li>cassandra-driver-core 2.0.4</li>
+<li>cassandra 2.0.1O</li>
+<li>cassandra-driver-core 2.0.6</li>
 <li>CGLIB nodep 2.2.2 for proxy building</li>
 <li>Jackson core, annotations, databind &amp; module jaxb annotations 2.2.3</li>
 <li>org.reflections 0.9.9-RC1</li>
 <li>Guava 15.0 </li>
-</ol><h2>
+<li>slf4j-api 1.7.2</li>
+<li>commons-io 2.4</li>
+<li>commons-lang3 3.3.2</li>
+<li>commons-collections 3.2.1</li>
+<li>validation-api 1.1.0.Final</li>
+</ol>
+
+<h2>
 <a name="5-minutes-tutorial" class="anchor" href="#5-minutes-tutorial"><span class="octicon octicon-link"></span></a>5 minutes tutorial</h2>
 
 <p>To boostrap quickly with <strong>Achilles</strong>, you can check the <strong><a href="https://github.com/doanduyhai/Achilles/wiki/5-minutes-Tutorial">5 minutes tutorial</a></strong></p>
