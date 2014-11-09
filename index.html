@@ -33,7 +33,7 @@
         <p><img src="assets/Achilles_New_Logo.png" alt="Achilles logo"></p>
 
 <p><br>
-            <a href="https://travis-ci.org/doanduyhai/Achilles"><img src="https://travis-ci.org/doanduyhai/Achilles.png?branch=master" alt="Build Status"></a></p>
+            <a href="https://travis-ci.org/doanduyhai/Achilles"><img src="https://travis-ci.org/doanduyhai/Achilles.png?branch=master" alt="Build Status"></a><a href="https://maven-badges.herokuapp.com/maven-central/info.archinnov/achilles-core"><img src="https://maven-badges.herokuapp.com/maven-central/info.archinnov/achilles-core/badge.svg" alt="Maven central"></a></p>
 
 <p>Achilles is an <strong>open source</strong> Persistence Manager for <strong>Apache Cassandra</strong>. Among all the features:</p>
 
@@ -43,10 +43,10 @@
 <li>JUnit <a href="https://github.com/Rule" class="user-mention">@Rule</a> with embedded <strong>Cassandra</strong> server for productive development</li>
 <li>Native collections and map support</li>
 <li>Advanced queries (slice, native or typed)</li>
-<li>Native support for counters </li>
+<li>Native support for counters</li>
 <li>Runtime setting of consistency level, ttl and timestamp</li>
 <li>Batch mode for atomic commits</li>
-<li>Dirty check </li>
+<li>Dirty check</li>
 <li>All new <strong>Cassandra 2.0</strong> features</li>
 <li>Life cycle interceptors</li>
 <li>Bean Validation (JSR-303)</li>
@@ -57,36 +57,34 @@
 </ul>
 
 <h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>To use <strong>Achilles</strong>, just add the following dependency in your <strong>pom.xml</strong>:</p>
 
-<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;dependency&gt;</span>    
-        <span class="nt">&lt;groupId&gt;</span>info.archinnov<span class="nt">&lt;/groupId&gt;</span>
-        <span class="nt">&lt;artifactId&gt;</span>achilles-core<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>3.0.7<span class="nt">&lt;/version&gt;</span>
-    <span class="nt">&lt;/dependency&gt;</span>
-</pre></div>
+<div class="highlight highlight-xml"><pre>    &lt;<span class="nt">dependency</span>&gt;
+        &lt;<span class="nt">groupId</span>&gt;info.archinnov&lt;/<span class="nt">groupId</span>&gt;
+        &lt;<span class="nt">artifactId</span>&gt;achilles-core&lt;/<span class="nt">artifactId</span>&gt;
+        &lt;<span class="nt">version</span>&gt;3.0.8&lt;/<span class="nt">version</span>&gt;
+    &lt;/<span class="nt">dependency</span>&gt;</pre></div>
 
 <p>For unit-testing with embedded Cassandra, add this dependency with <strong>test</strong> scope:</p>
 
-<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;dependency&gt;</span>    
-        <span class="nt">&lt;groupId&gt;</span>info.archinnov<span class="nt">&lt;/groupId&gt;</span>
-        <span class="nt">&lt;artifactId&gt;</span>achilles-junit<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>3.0.7<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-    <span class="nt">&lt;/dependency&gt;</span>
-</pre></div>
+<div class="highlight highlight-xml"><pre>    &lt;<span class="nt">dependency</span>&gt;
+        &lt;<span class="nt">groupId</span>&gt;info.archinnov&lt;/<span class="nt">groupId</span>&gt;
+        &lt;<span class="nt">artifactId</span>&gt;achilles-junit&lt;/<span class="nt">artifactId</span>&gt;
+        &lt;<span class="nt">version</span>&gt;3.0.8&lt;/<span class="nt">version</span>&gt;
+        &lt;<span class="nt">scope</span>&gt;test&lt;/<span class="nt">scope</span>&gt;
+    &lt;/<span class="nt">dependency</span>&gt;</pre></div>
 
 <p>For now, <strong>Achilles</strong> depends on the following libraries:</p>
 
 <ol>
-<li>cassandra 2.0.1O</li>
-<li>cassandra-driver-core 2.0.6</li>
+<li>cassandra 2.0.11</li>
+<li>cassandra-driver-core 2.0.7</li>
 <li>CGLIB nodep 2.2.2 for proxy building</li>
 <li>Jackson core, annotations, databind &amp; module jaxb annotations 2.2.3</li>
 <li>org.reflections 0.9.9-RC1</li>
-<li>Guava 15.0 </li>
+<li>Guava 15.0</li>
 <li>slf4j-api 1.7.2</li>
 <li>commons-io 2.4</li>
 <li>commons-lang3 3.3.2</li>
@@ -95,34 +93,34 @@
 </ol>
 
 <h2>
-<a name="5-minutes-tutorial" class="anchor" href="#5-minutes-tutorial"><span class="octicon octicon-link"></span></a>5 minutes tutorial</h2>
+<a id="5-minutes-tutorial" class="anchor" href="#5-minutes-tutorial" aria-hidden="true"><span class="octicon octicon-link"></span></a>5 minutes tutorial</h2>
 
 <p>To boostrap quickly with <strong>Achilles</strong>, you can check the <strong><a href="https://github.com/doanduyhai/Achilles/wiki/5-minutes-Tutorial">5 minutes tutorial</a></strong></p>
 
 <h2>
-<a name="quick-reference" class="anchor" href="#quick-reference"><span class="octicon octicon-link"></span></a>Quick Reference</h2>
+<a id="quick-reference" class="anchor" href="#quick-reference" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick Reference</h2>
 
 <p>To be productive quickly with <strong>Achilles</strong>. Most of useful examples are given in the <strong><a href="https://github.com/doanduyhai/Achilles/wiki/Quick-Reference">Quick Reference</a></strong></p>
 
 <h2>
-<a name="advanced-tutorial" class="anchor" href="#advanced-tutorial"><span class="octicon octicon-link"></span></a>Advanced tutorial</h2>
+<a id="advanced-tutorial" class="anchor" href="#advanced-tutorial" aria-hidden="true"><span class="octicon octicon-link"></span></a>Advanced tutorial</h2>
 
 <p>To get a deeper look on how you can use <strong>Achilles</strong>, check out the <strong><a href="https://github.com/doanduyhai/Achilles-Twitter-Demo">Twitter Demo</a></strong> application and read the <strong><a href="https://github.com/doanduyhai/Achilles/wiki/Advanced-Tutorial:-Twitter-Demo">Advanced Tutorial</a></strong> section</p>
 
 <h2>
-<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
 
 <p>All the documentation and tutorial is available in the <strong><a href="https://github.com/doanduyhai/Achilles/wiki">Wiki</a></strong></p>
 
 <p>Versioned documentation is available at <strong><a href="https://github.com/doanduyhai/Achilles/tree/master/documentation/versions">Documentation</a></strong></p>
 
 <h2>
-<a name="mailing-list" class="anchor" href="#mailing-list"><span class="octicon octicon-link"></span></a>Mailing list</h2>
+<a id="mailing-list" class="anchor" href="#mailing-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mailing list</h2>
 
-<p>For any question, bug encountered, you can use the <strong><a href="https://groups.google.com/forum/?hl=fr#!forum/cassandra-achilles">mailing list</a></strong> </p>
+<p>For any question, bug encountered, you can use the <strong><a href="https://groups.google.com/forum/?hl=fr#!forum/cassandra-achilles">mailing list</a></strong></p>
 
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>Copyright 2012-2014 DuyHai DOAN</p>
 
