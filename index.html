@@ -17,7 +17,7 @@
     <div class="wrapper">
       <header>
         <h1 class="header">Achilles</h1>
-        <p class="header">A full featured Persistence Manager for Cassandra</p>
+        <p class="header">An advanced Java Object Mapper for Cassandra</p>
 
         <ul>
           <li class="download"><a class="buttons" href="https://github.com/doanduyhai/Achilles/zipball/master">Download ZIP</a></li>
@@ -35,27 +35,23 @@
 <p><br>
             <a href="https://travis-ci.org/doanduyhai/Achilles"><img src="https://travis-ci.org/doanduyhai/Achilles.png?branch=master" alt="Build Status"></a><a href="https://maven-badges.herokuapp.com/maven-central/info.archinnov/achilles-core"><img src="https://maven-badges.herokuapp.com/maven-central/info.archinnov/achilles-core/badge.svg" alt="Maven central"></a></p>
 
-<p>Achilles is an <strong>open source</strong> Persistence Manager for <strong>Apache Cassandra</strong>. Among all the features:</p>
+<p>Achilles is an <strong>open source</strong>  advanced object mapper for <strong>Apache Cassandra</strong>. Among all the features:</p>
 
 <ul>
-<li>Advanced bean mapping (compound primary key, composite partition key, timeUUID...)</li>
+<li>Advanced bean mapping (compound primary key, composite partition key, timeUUID, counter, static column ...)</li>
+<li>Pluggable <strong>codec system</strong> to define your own types</li>
+<li>Life cycle <strong>interceptors</strong> to define custom behavior before INSERT/UPDATE/DELETE/SELECT operations</li>
+<li>Fluent <strong>options system</strong> to parameter runtime statements (consistency level, retry policy, ...)</li>
+<li>Powerful and <strong>type-safe DSL</strong> to create your own queries</li>
 <li>Display of DML scripts &amp; DDL statements</li>
-<li>JUnit <a href="https://github.com/Rule" class="user-mention">@Rule</a> with embedded <strong>Cassandra</strong> server for productive development</li>
-<li>Native collections and map support</li>
-<li>Advanced queries (slice, native or typed)</li>
-<li>Native support for counters</li>
-<li>Runtime setting of consistency level, ttl and timestamp</li>
-<li>Batch mode for atomic commits</li>
-<li>Dirty check</li>
-<li>All new <strong>Cassandra 2.0</strong> features</li>
-<li>Life cycle interceptors</li>
-<li>Bean Validation (JSR-303)</li>
-<li>
-<strong>Lightweight Transaction</strong> support</li>
-<li>Multi-keyspace</li>
-<li>Naming Strategy</li>
-<li>Type Transformer</li>
-<li>Asynchronous operations</li>
+<li>Wrapper to deploy an embedded <strong>Cassandra</strong> server easily</li>
+<li>Tight integration with JUnit for productive TDD programming</li>
+<li>Support for Bean Validation (JSR-303)</li>
+<li>Support for <strong>Lightweight Transaction</strong> with dedicated listener interface </li>
+<li>Flexible naming strategy &amp; insert strategy</li>
+<li>Runtime <strong>Schema Name Provider</strong> for multi-tenant environments</li>
+<li>Full compatibility with Java 8 <strong>CompletableFuture</strong>
+</li>
 </ul>
 
 <h2>
@@ -75,12 +71,17 @@
     </thead>
     <tbody>
         <tr>
-            <td>3.2.2</td>
+            <td>4.0.0</td>
+            <td>2.2.0-rc3</td>
+            <td>2.2.3</td>
+        </tr>       
+        <tr>
+            <td>3.2.3 (limited to Cassandra 2.1.x features)</td>
             <td>2.1.6</td>
             <td>2.1.5</td>
         </tr>       
         <tr>
-            <td>3.0.21 (limited to Cassandra 2.0.x features)</td>
+            <td>3.0.22 (limited to Cassandra 2.0.x features)</td>
             <td>2.1.6</td>
             <td>2.0.15</td>
         </tr>
@@ -89,7 +90,7 @@
 
 <p>To use <strong>Achilles</strong>, just add the following dependency in your <strong>pom.xml</strong>:</p>
 
-<div class="highlight highlight-xml"><pre>    &lt;<span class="pl-ent">dependency</span>&gt;
+<div class="highlight highlight-text-xml"><pre>    &lt;<span class="pl-ent">dependency</span>&gt;
         &lt;<span class="pl-ent">groupId</span>&gt;info.archinnov&lt;/<span class="pl-ent">groupId</span>&gt;
         &lt;<span class="pl-ent">artifactId</span>&gt;achilles-core&lt;/<span class="pl-ent">artifactId</span>&gt;
         &lt;<span class="pl-ent">version</span>&gt;${achilles.version}&lt;/<span class="pl-ent">version</span>&gt;
@@ -97,7 +98,7 @@
 
 <p>For unit-testing with embedded Cassandra, add this dependency with <strong>test</strong> scope:</p>
 
-<div class="highlight highlight-xml"><pre>    &lt;<span class="pl-ent">dependency</span>&gt;
+<div class="highlight highlight-text-xml"><pre>    &lt;<span class="pl-ent">dependency</span>&gt;
         &lt;<span class="pl-ent">groupId</span>&gt;info.archinnov&lt;/<span class="pl-ent">groupId</span>&gt;
         &lt;<span class="pl-ent">artifactId</span>&gt;achilles-junit&lt;/<span class="pl-ent">artifactId</span>&gt;
         &lt;<span class="pl-ent">version</span>&gt;${achilles.version}&lt;/<span class="pl-ent">version</span>&gt;
@@ -109,16 +110,23 @@
 <ol>
 <li>cassandra (see matrix version above)</li>
 <li>cassandra-driver-core (see matrix version above)</li>
-<li>CGLIB nodep 2.2.2 for proxy building</li>
 <li>Jackson core, annotations, databind &amp; module jaxb annotations 2.3.3</li>
-<li>org.reflections 0.9.10</li>
-<li>Guava 15.0</li>
+<li>Google Auto Common 0.4</li>
+<li>Google Auto Service 1.0-rc2</li>
+<li>Java Poet 1.2.0 </li>
+<li>Guava 18.0</li>
 <li>slf4j-api 1.7.2</li>
 <li>commons-io 2.4</li>
 <li>commons-lang3 3.3.2</li>
 <li>commons-collections 3.2.1</li>
 <li>validation-api 1.1.0.Final</li>
 </ol>
+
+<h2>
+<a id="configure-your-ide" class="anchor" href="#configure-your-ide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configure Your IDE</h2>
+
+<p><strong>Achilles</strong> is using code generation at compile time through annotation processors, you'll need to configure your IDE carefully. 
+ Please follow the <strong><a href="https://github.com/doanduyhai/Achilles/wiki/IDE-configuration">IDE Configuration</a></strong> guide</p>
 
 <h2>
 <a id="5-minutes-tutorial" class="anchor" href="#5-minutes-tutorial" aria-hidden="true"><span class="octicon octicon-link"></span></a>5 minutes tutorial</h2>
@@ -133,7 +141,7 @@
 <h2>
 <a id="advanced-tutorial" class="anchor" href="#advanced-tutorial" aria-hidden="true"><span class="octicon octicon-link"></span></a>Advanced tutorial</h2>
 
-<p>To get a deeper look on how you can use <strong>Achilles</strong>, check out the <strong><a href="https://github.com/doanduyhai/Achilles-Twitter-Demo">Twitter Demo</a></strong> application and read the <strong><a href="https://github.com/doanduyhai/Achilles/wiki/Advanced-Tutorial:-Twitter-Demo">Advanced Tutorial</a></strong> section</p>
+<p>To get a deeper look on how you can use <strong>Achilles</strong>, check out the <strong><a href="https://github.com/doanduyhai/Achilles/wiki/Advanced-Tutorial:-KillrChat">KillrChat</a></strong> application</p>
 
 <h2>
 <a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
@@ -150,7 +158,7 @@
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
-<p>Copyright 2012-2014 DuyHai DOAN</p>
+<p>Copyright 2012-2015 DuyHai DOAN</p>
 
 <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this application except in compliance with the License. You may obtain a copy of the License at</p>
 
