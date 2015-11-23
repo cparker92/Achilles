@@ -17,7 +17,7 @@
     <div class="wrapper">
       <header>
         <h1 class="header">Achilles</h1>
-        <p class="header">An advanced Java Object Mapper for Cassandra</p>
+        <p class="header">An advanced Java Object Mapper/Query DSL generator for Cassandra</p>
 
         <ul>
           <li class="download"><a class="buttons" href="https://github.com/doanduyhai/Achilles/zipball/master">Download ZIP</a></li>
@@ -30,10 +30,13 @@
 
       </header>
       <section>
-        <p><img src="assets/Achilles_New_Logo.png" alt="Achilles logo"></p>
+        <p><img src="https://raw.github.com/wiki/doanduyhai/Achilles/assets/Achilles_New_Logo.png" alt="Achilles"></p>
 
 <p><br>
-            <a href="https://travis-ci.org/doanduyhai/Achilles"><img src="https://travis-ci.org/doanduyhai/Achilles.png?branch=master" alt="Build Status"></a><a href="https://maven-badges.herokuapp.com/maven-central/info.archinnov/achilles-core"><img src="https://maven-badges.herokuapp.com/maven-central/info.archinnov/achilles-core/badge.svg" alt="Maven central"></a></p>
+            <a href="https://travis-ci.org/doanduyhai/Achilles"><img src="https://travis-ci.org/doanduyhai/Achilles.png?branch=master" alt="Build Status"></a></p>
+
+<h2>
+<a id="presentation" class="anchor" href="#presentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Presentation</h2>
 
 <p>Achilles is an <strong>open source</strong>  advanced object mapper for <strong>Apache Cassandra</strong>. Among all the features:</p>
 
@@ -71,8 +74,8 @@
     </thead>
     <tbody>
         <tr>
-            <td>4.0.0</td>
-            <td>2.2.0-rc3</td>
+            <td>4.0.1</td>
+            <td>3.0.0-alpha5</td>
             <td>2.2.3</td>
         </tr>       
         <tr>
@@ -88,6 +91,12 @@
     </tbody>
 </table>    
 
+<blockquote>
+<p>Warning: thre will be no new features for branches older than <strong>4.x.x</strong>. Those branches are
+only supported for bug fixes. New features will <strong>not</strong> be back-ported. Please upgrade to the
+latest version of <strong>Achilles</strong> to benefit from new features </p>
+</blockquote>
+
 <p>To use <strong>Achilles</strong>, just add the following dependency in your <strong>pom.xml</strong>:</p>
 
 <div class="highlight highlight-text-xml"><pre>    &lt;<span class="pl-ent">dependency</span>&gt;
@@ -95,6 +104,10 @@
         &lt;<span class="pl-ent">artifactId</span>&gt;achilles-core&lt;/<span class="pl-ent">artifactId</span>&gt;
         &lt;<span class="pl-ent">version</span>&gt;${achilles.version}&lt;/<span class="pl-ent">version</span>&gt;
     &lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
+
+<blockquote>
+<p>Warning: Achilles 4.x requires a JDK 8 to work. It is recommended to use JDK 8 update 45 or later</p>
+</blockquote>
 
 <p>For unit-testing with embedded Cassandra, add this dependency with <strong>test</strong> scope:</p>
 
@@ -120,6 +133,7 @@
 <li>commons-lang3 3.3.2</li>
 <li>commons-collections 3.2.1</li>
 <li>validation-api 1.1.0.Final</li>
+<li>org.eclipse.jdt.core.compiler-ecj 4.4.2</li>
 </ol>
 
 <h2>
