@@ -36,7 +36,7 @@
             <a href="https://travis-ci.org/doanduyhai/Achilles"><img src="https://travis-ci.org/doanduyhai/Achilles.png?branch=master" alt="Build Status"></a></p>
 
 <h2>
-<a id="presentation" class="anchor" href="#presentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Presentation</h2>
+<a id="presentation" class="anchor" href="#presentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Presentation</h2>
 
 <p>Achilles is an <strong>open source</strong>  advanced object mapper for <strong>Apache Cassandra</strong>. Among all the features:</p>
 
@@ -51,14 +51,20 @@
 <li>Tight integration with JUnit for productive TDD programming</li>
 <li>Support for Bean Validation (JSR-303)</li>
 <li>Support for <strong>Lightweight Transaction</strong> with dedicated listener interface </li>
+<li>Support for <strong>Materialized View</strong> </li>
 <li>Flexible naming strategy &amp; insert strategy</li>
 <li>Runtime <strong>Schema Name Provider</strong> for multi-tenant environments</li>
 <li>Full compatibility with Java 8 <strong>CompletableFuture</strong>
 </li>
 </ul>
 
+<blockquote>
+<p><strong>Warning: Achilles versions 3.x are no longer maintained, only bug-fixes are supported, please migrate to
+version 4.x and follow the <a href="https://github.com/doanduyhai/Achilles/wiki/Migration-Guide">Migration From 3.x Guide</a></strong></p>
+</blockquote>
+
 <h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Below is the compatibility matrix between <strong>Achilles</strong>, <strong>Java Driver</strong> and <strong>Cassandra</strong> versions</p>
 
@@ -74,7 +80,12 @@
     </thead>
     <tbody>
         <tr>
-            <td>4.0.1</td>
+            <td>4.1.0</td>
+            <td>3.0.0</td>
+            <td>3.3</td>
+        </tr>       
+        <tr>
+            <td>4.0.1 (limited to Cassandra 2.2.3 features)</td>
             <td>3.0.0-alpha5</td>
             <td>2.2.3</td>
         </tr>       
@@ -94,7 +105,7 @@
 <blockquote>
 <p>Warning: thre will be no new features for branches older than <strong>4.x.x</strong>. Those branches are
 only supported for bug fixes. New features will <strong>not</strong> be back-ported. Please upgrade to the
-latest version of <strong>Achilles</strong> to benefit from new features </p>
+latest version of <strong>Achilles</strong> to benefit from new features</p>
 </blockquote>
 
 <p>To use <strong>Achilles</strong>, just add the following dependency in your <strong>pom.xml</strong>:</p>
@@ -105,8 +116,24 @@ latest version of <strong>Achilles</strong> to benefit from new features </p>
         &lt;<span class="pl-ent">version</span>&gt;${achilles.version}&lt;/<span class="pl-ent">version</span>&gt;
     &lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
 
+<p>Do not forget to deactivate <em>incremental compilation</em> and use <em>Java 8</em> in your <strong>pom.xml</strong> file</p>
+
+<div class="highlight highlight-text-xml"><pre>    &lt;<span class="pl-ent">build</span>&gt;
+        &lt;<span class="pl-ent">plugins</span>&gt;
+            &lt;<span class="pl-ent">plugin</span>&gt;
+                &lt;<span class="pl-ent">groupId</span>&gt;org.apache.maven.plugins&lt;/<span class="pl-ent">groupId</span>&gt;
+                &lt;<span class="pl-ent">artifactId</span>&gt;maven-compiler-plugin&lt;/<span class="pl-ent">artifactId</span>&gt;
+                &lt;<span class="pl-ent">configuration</span>&gt;
+                    &lt;<span class="pl-ent">source</span>&gt;1.8&lt;/<span class="pl-ent">source</span>&gt;
+                    &lt;<span class="pl-ent">target</span>&gt;1.8&lt;/<span class="pl-ent">target</span>&gt;
+                    &lt;<span class="pl-ent">useIncrementalCompilation</span>&gt;false&lt;/<span class="pl-ent">useIncrementalCompilation</span>&gt;
+                &lt;/<span class="pl-ent">configuration</span>&gt;
+            &lt;/<span class="pl-ent">plugin</span>&gt;
+        &lt;/<span class="pl-ent">plugins</span>&gt;
+    &lt;/<span class="pl-ent">build</span>&gt;        </pre></div>
+
 <blockquote>
-<p>Warning: Achilles 4.x requires a JDK 8 to work. It is recommended to use JDK 8 update 45 or later</p>
+<p>Achilles 4.x requires a JDK 8 to work. It is recommended to use JDK 8 update 45 or later</p>
 </blockquote>
 
 <p>For unit-testing with embedded Cassandra, add this dependency with <strong>test</strong> scope:</p>
@@ -126,7 +153,7 @@ latest version of <strong>Achilles</strong> to benefit from new features </p>
 <li>Jackson core, annotations, databind &amp; module jaxb annotations 2.3.3</li>
 <li>Google Auto Common 0.4</li>
 <li>Google Auto Service 1.0-rc2</li>
-<li>Java Poet 1.2.0 </li>
+<li>Java Poet 1.5.1 </li>
 <li>Guava 18.0</li>
 <li>slf4j-api 1.7.2</li>
 <li>commons-io 2.4</li>
@@ -137,42 +164,42 @@ latest version of <strong>Achilles</strong> to benefit from new features </p>
 </ol>
 
 <h2>
-<a id="configure-your-ide" class="anchor" href="#configure-your-ide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configure Your IDE</h2>
+<a id="configure-your-ide" class="anchor" href="#configure-your-ide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configure Your IDE</h2>
 
 <p><strong>Achilles</strong> is using code generation at compile time through annotation processors, you'll need to configure your IDE carefully. 
  Please follow the <strong><a href="https://github.com/doanduyhai/Achilles/wiki/IDE-configuration">IDE Configuration</a></strong> guide</p>
 
 <h2>
-<a id="5-minutes-tutorial" class="anchor" href="#5-minutes-tutorial" aria-hidden="true"><span class="octicon octicon-link"></span></a>5 minutes tutorial</h2>
+<a id="5-minutes-tutorial" class="anchor" href="#5-minutes-tutorial" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5 minutes tutorial</h2>
 
 <p>To boostrap quickly with <strong>Achilles</strong>, you can check the <strong><a href="https://github.com/doanduyhai/Achilles/wiki/5-minutes-Tutorial">5 minutes tutorial</a></strong></p>
 
 <h2>
-<a id="quick-reference" class="anchor" href="#quick-reference" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick Reference</h2>
+<a id="quick-reference" class="anchor" href="#quick-reference" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick Reference</h2>
 
 <p>To be productive quickly with <strong>Achilles</strong>. Most of useful examples are given in the <strong><a href="https://github.com/doanduyhai/Achilles/wiki/Quick-Reference">Quick Reference</a></strong></p>
 
 <h2>
-<a id="advanced-tutorial" class="anchor" href="#advanced-tutorial" aria-hidden="true"><span class="octicon octicon-link"></span></a>Advanced tutorial</h2>
+<a id="advanced-tutorial" class="anchor" href="#advanced-tutorial" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Advanced tutorial</h2>
 
 <p>To get a deeper look on how you can use <strong>Achilles</strong>, check out the <strong><a href="https://github.com/doanduyhai/Achilles/wiki/Advanced-Tutorial:-KillrChat">KillrChat</a></strong> application</p>
 
 <h2>
-<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h2>
 
 <p>All the documentation and tutorial is available in the <strong><a href="https://github.com/doanduyhai/Achilles/wiki">Wiki</a></strong></p>
 
 <p>Versioned documentation is available at <strong><a href="https://github.com/doanduyhai/Achilles/tree/master/documentation/versions">Documentation</a></strong></p>
 
 <h2>
-<a id="mailing-list" class="anchor" href="#mailing-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mailing list</h2>
+<a id="mailing-list" class="anchor" href="#mailing-list" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mailing list</h2>
 
 <p>For any question, bug encountered, you can use the <strong><a href="https://groups.google.com/forum/?hl=fr#!forum/cassandra-achilles">mailing list</a></strong></p>
 
 <h2>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
 
-<p>Copyright 2012-2015 DuyHai DOAN</p>
+<p>Copyright 2012-2016 DuyHai DOAN</p>
 
 <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this application except in compliance with the License. You may obtain a copy of the License at</p>
 
